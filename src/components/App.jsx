@@ -9,13 +9,24 @@ class App extends Component {
     filter: '',
   };
   addContact = newData => {
-    this.setState(prev => ({
-      contacts: [newData, ...prev.contacts],
-    }));
+    if (this.state.contacts.find(item => item.name === newData.name)) {
+      alert(`${newData.name} is already in contacts.`);
+    } else {
+      this.setState(prev => ({
+        contacts: [newData, ...prev.contacts],
+      }));
+    }
   };
 
   addFilter = e => {
-    this.setState({ filter: e.target.value.toLowerCase() });
+    const filterSymbols = e.target.value.toLowerCase();
+    this.setState({ filter: filterSymbols });
+  };
+  getFilteredItems = () => {
+    const contactList = this.state.contacts.filter(el => {
+      return el.name.toLowerCase().includes(this.state.filter);
+    });
+    return contactList;
   };
   deleteContact = id => {
     this.setState(prev => ({
@@ -24,6 +35,7 @@ class App extends Component {
   };
 
   render() {
+    const filteredContacts = this.getFilteredItems();
     return (
       <div
         style={{
@@ -39,8 +51,7 @@ class App extends Component {
         <h2>Contacts</h2>
         <Filter addFilter={this.addFilter} />
         <ContactList
-          contacts={this.state.contacts}
-          filter={this.state.filter}
+          contactList={filteredContacts}
           deleteContact={this.deleteContact}
         />
       </div>

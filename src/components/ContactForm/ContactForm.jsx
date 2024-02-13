@@ -11,13 +11,9 @@ class ContactForm extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.props.contacts.find(item => item.name === e.target.name.value)) {
-      alert(`${e.target.name.value} is already in contacts.`);
-    } else {
-      const createdId = nanoid();
-      this.props.addContact({ ...this.state, id: createdId });
-      this.setState({ name: '', number: '', id: '' });
-    }
+    const createdId = nanoid();
+    this.props.addContact({ ...this.state, id: createdId });
+    this.setState({ name: '', number: '', id: '' });
   };
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });

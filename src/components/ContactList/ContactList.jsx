@@ -1,15 +1,9 @@
 import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 
-export const ContactList = ({ contacts, filter, deleteContact }) => {
-  const filteredItems =
-    filter.length === 0
-      ? contacts
-      : contacts.filter(el => {
-          return el.name.toLowerCase().includes(filter);
-        });
+export const ContactList = ({ contactList, deleteContact }) => {
   return (
     <ul>
-      {filteredItems.map(item => (
+      {contactList.map(item => (
         <ContactListItem
           key={item.id}
           id={item.id}

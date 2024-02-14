@@ -7,13 +7,11 @@ class ContactForm extends Component {
   state = {
     name: '',
     number: '',
-    id: '',
   };
   handleSubmit = e => {
     e.preventDefault();
-    const createdId = nanoid();
-    this.props.addContact({ ...this.state, id: createdId });
-    this.setState({ name: '', number: '', id: '' });
+    this.props.addContact({ ...this.state, id: nanoid() });
+    this.setState({ name: '', number: '' });
   };
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });

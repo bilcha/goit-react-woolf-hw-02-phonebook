@@ -9,7 +9,11 @@ class App extends Component {
     filter: '',
   };
   addContact = newData => {
-    if (this.state.contacts.find(item => item.name === newData.name)) {
+    if (
+      this.state.contacts.find(
+        item => item.name.toLowerCase() === newData.name.toLowerCase()
+      )
+    ) {
       alert(`${newData.name} is already in contacts.`);
     } else {
       this.setState(prev => ({
@@ -23,10 +27,9 @@ class App extends Component {
     this.setState({ filter: filterSymbols });
   };
   getFilteredItems = () => {
-    const contactList = this.state.contacts.filter(el => {
+    return this.state.contacts.filter(el => {
       return el.name.toLowerCase().includes(this.state.filter);
     });
-    return contactList;
   };
   deleteContact = id => {
     this.setState(prev => ({
